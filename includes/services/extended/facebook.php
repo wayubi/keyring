@@ -45,16 +45,18 @@ class Keyring_Service_Facebook extends Keyring_Service_OAuth2 {
 		add_filter( 'keyring_facebook_request_token_params', array( $this, 'filter_request_token' ) );
 	}
 
+	/**
+	 * @author beaulebens <https://github.com/beaulebens>
+	 * @author wayubi <https://github.com/wayubi>
+	 */
 	function basic_ui_intro() {
 		echo '<p>' . __( "If you haven't already, you'll need to set up an app on Facebook:", 'keyring' ) . '</p>';
 		echo '<ol>';
-		/* translators: url */
-		echo '<li>' . sprintf( __( "Click <strong>+ Create New App</strong> at the top-right of <a href='%s'>this page</a>", 'keyring' ), 'https://developers.facebook.com/apps' ) . '</li>';
-		echo '<li>' . __( 'Enter a name for your app (maybe the name of your website?) and a Category, click <strong>Continue</strong> (you can skip optional things)', 'keyring' ) . '</li>';
+		echo '<li>' . sprintf( __( "Click <strong>Create App</strong> at the top-right of <a href='%s'>this page</a>", 'keyring' ), 'https://developers.facebook.com/apps' ) . '</li>';
+		echo '<li>' . __( 'Select an App Type and click <strong>Continue</strong>', 'keyring' ) . '</li>';
+		echo '<li>' . __( 'Fill in App Display Type and App Contact Email Type (you can skip optional fields), and click <strong>Continue</strong>', 'keyring' ) . '</li>';
 		echo '<li>' . __( 'Enter whatever is in the CAPTCHA and click <strong>Continue</strong>', 'keyring' ) . '</li>';
-		/* translators: url */
-		echo '<li>' . sprintf( __( 'Click <strong>Settings</strong> on the left and then <strong>Advanced</strong> at the top of that page. Under <strong>Valid OAuth redirect URIs</strong>, enter your domain name. That value is probably <code>%s</code>', 'keyring' ), $_SERVER['HTTP_HOST'] ) . '</li>';
-		/* translators: url */
+		echo '<li>' . sprintf( __( 'Click <strong>Settings</strong> on the left and then <strong>Advanced</strong> at the top of that page. Under <strong>Valid OAuth redirect URIs</strong>, enter your domain name. That value is probably <code>%s</code>', 'keyring' ), $this->redirect_uri ) . '</li>';
 		echo '<li>' . sprintf( __( 'Click the <strong>Website with Facebook Login</strong> box and enter the URL to your website, which is probably <code>%s</code>', 'keyring' ), get_bloginfo( 'url' ) ) . '</li>';
 		echo '<li>' . __( 'Click <strong>Save Changes</strong>', 'keyring' ) . '</li>';
 		echo '</ol>';
